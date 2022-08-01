@@ -1,8 +1,9 @@
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import 'sf-font';
 import Link from 'next/link'
-import { Spacer, Button, Col, Row, Container, Dropdown } from '@nextui-org/react';
+import { Spacer, Button, Col, Row, Container, Dropdown, Text } from '@nextui-org/react';
 import react from "react";
+import Footer from './footer';
 
 const theme = createTheme({
   type: "dark",
@@ -40,7 +41,7 @@ function MyApp({ Component, pageProps }) {
             <Container lg css={{marginTop:'$5'}}>
             <Row justify="center">
             <Col css={{ marginTop: '$8' }}>
-              <img style={{width:'100px'}} src="polygonwhite.png" />
+              <img style={{width:'220px'}} src="n2DMarket.png" />
             </Col>
             <Col css={{ marginTop: '$8' }} >
             <Link href="/">
@@ -87,9 +88,12 @@ function MyApp({ Component, pageProps }) {
             </Col>
             </Row>
  </Container>
- <NextUIProvider>
+ <NextUIProvider theme={theme} >
 <Component {...pageProps} />
 </NextUIProvider>
+<Footer>
+  <Footer/>
+</Footer>
 </div>
 </div>
 

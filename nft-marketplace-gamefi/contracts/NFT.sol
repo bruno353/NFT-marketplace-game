@@ -26,7 +26,6 @@ contract SampleERC721 is ERC721URIStorage {
 
 
 
-
   //Creating the insured structs:
   struct Insured {
     uint256 id;
