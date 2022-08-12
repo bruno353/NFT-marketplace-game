@@ -53,21 +53,17 @@ export default function Sell() {
           const Uri = Promise.resolve(rawUri)
           const getUri = Uri.then(value => {
             console.log("AQUIII " + value)
-
-            var cleanUri = value.replace('ipfs://', 'https://ipfs.io/ipfs/')
-            var cleanUri2 = 'https://ipfs.io/ipfs/' + value
-            console.log("AQUIII2 " + cleanUri2)
-            let metadata = axios.get(cleanUri2).catch(function (error) {
+            var cleanUri = 'https://ipfs.io/ipfs/' + value
+            let metadata = axios.get(cleanUri).catch(function (error) {
               console.log(error.toJSON());
             });
-            console.log("AQUIII3 " + metadata)
             return metadata;
           })
           getUri.then(value => {
             let rawImg = value.data.image
             var name = value.data.name
             var desc = value.data.description
-            let image = rawImg.replace('ipfs://', 'https://ipfs.io/ipfs/')
+            let image = 'https://ipfs.io/ipfs/' + rawImg
             Promise.resolve(owner).then(value => {
               let ownerW = value;
               let meta = {
@@ -179,12 +175,11 @@ return (
           const provider = new ethers.providers.Web3Provider(connection)
           const signer = provider.getSigner()
           const price = ethers.utils.parseUnits(resalePrice.price, 'ether')
-          const contractnft = new ethers.Contract(hhnftcol, NFTCollection, signer);
-          await contractnft.setApprovalForAll(hhresell, true);
-          let contract = new ethers.Contract(hhresell, Resell, signer)
-          let listingFee = await contract.getListingFee()
-          listingFee = listingFee.toString()
-          let transaction = await contract.listSale(nft.tokenId, price, { value: listingFee })
+          const contractnft = new ethers.Contract(ropstenNFTcontract, NFT, signer);
+          //let listingFee = await contractnft.getListingFee()
+          //listingFee = listingFee.toString()
+          //let transaction = await contract.listSale(nft.tokenId, price, { value: listingFee })
+          let transaction = await contractnft.putItemForSale(nft.tokenId, price);
           await transaction.wait()
           router.push('/')
       }
