@@ -33,7 +33,7 @@ Global Parameters
 */
 
 //your parameters (Bruno)
-export var ropstenNFTcontract = "0x948f59d055F58d3E1FCbFDaff9D7BC68BF6A7072";
+export var ropstenNFTcontract = "0x0d1191e892e6250d28A69005ADb54240EA9AE32c";
 var ropstenrpc = "https://ropsten.infura.io/v3/b89edb1ce5be41a8abea66956504aa1b";
 
 

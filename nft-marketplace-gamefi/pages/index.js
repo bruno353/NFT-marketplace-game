@@ -18,10 +18,11 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function Home() {
-  const [hhlist, hhResellNfts] = useState([])
+  console.log("OH MY GOOOODD")
+  const [hhlist, ropstenNFTcontract] = useState([])
   useEffect(() => {
     loadHardHatResell()
-  }, [hhResellNfts])
+  }, [ropstenNFTcontract])
 
   const handleConfetti = () => {
     confetti();
@@ -150,7 +151,7 @@ export default function Home() {
                   const connection = await web3Modal.connect()
                   const provider = new ethers.providers.Web3Provider(connection)
                   const signer = provider.getSigner()
-                  const contract = new ethers.Contract(hhresell, Resell, signer)
+                  const contract = new ethers.Contract(ropstenNFTcontract, NFT, signer)
                   const transaction = await contract.buyNft(nft.tokenId, { value: nft.cost })
                   await transaction.wait()
                   router.push('/portal')

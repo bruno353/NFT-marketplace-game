@@ -39,21 +39,22 @@ export default function Sell() {
       const wallet = new ethers.Wallet(key, provider);
       const contract = new ethers.Contract(ropstenNFTcontract, NFT, wallet);
       const itemArray = [];
-      const owner2 = await contract.ownerOf(1).then(result => {console.log(console.log("AQUIIIIII  " + result))})
-      contract.totalSupply().then(result => {
+      const owner2 = await contract._tokenIds().then(result => {console.log(console.log("AQUIIIIII  " + result))})
+      contract._tokenIds().then(result => {
         console.log("OIII" + result)
         for (let i = 0; i < result; i++) {
           var token = i + 1                    
           const owner = contract.ownerOf(token).catch(function (error) {
               console.log("tokens filtered");
             });
+          
           const rawUri = contract.tokenURI(token).catch(function (error) {
               console.log("tokens filtered");
             });
           const Uri = Promise.resolve(rawUri)
           const getUri = Uri.then(value => {
-            console.log("AQUIII " + value)
-            var cleanUri = 'https://ipfs.io/ipfs/' + value
+            console.log("URI: " + value)
+            var cleanUri = value
             let metadata = axios.get(cleanUri).catch(function (error) {
               console.log(error.toJSON());
             });
@@ -63,7 +64,7 @@ export default function Sell() {
             let rawImg = value.data.image
             var name = value.data.name
             var desc = value.data.description
-            let image = 'https://ipfs.io/ipfs/' + rawImg
+            let image =  rawImg
             Promise.resolve(owner).then(value => {
               let ownerW = value;
               let meta = {
@@ -101,7 +102,7 @@ export default function Sell() {
             });
           const Uri = Promise.resolve(rawUri)
           const getUri = Uri.then(value => {
-            var cleanUri = value.replace('ipfs://', 'https://ipfs.io/ipfs/')
+            var cleanUri = value
             let metadata = axios.get(cleanUri).catch(function (error) {
               console.log(error.toJSON());
             });
@@ -111,7 +112,7 @@ export default function Sell() {
             let rawImg = value.data.image
             var name = value.data.name
             var desc = value.data.description
-            let image = rawImg.replace('ipfs://', 'https://ipfs.io/ipfs/')
+            let image = rawImg
             Promise.resolve(owner).then(value => {
               let ownerW = value;
               let meta = {
