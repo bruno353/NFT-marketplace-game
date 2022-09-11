@@ -18,75 +18,58 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function Home() {
-  console.log("OH MY GOOOODD")
-  const [hhlist, ropstenNFTcontract] = useState([])
+  const [hhlist, ropstenNFTcontractsell] = useState([])
   useEffect(() => {
     loadHardHatResell()
-  }, [ropstenNFTcontract])
+  }, [ropstenNFTcontractsell])
 
   const handleConfetti = () => {
     confetti();
   };
   const router = useRouter()
-
+  console.log("tokensids:")
   async function loadHardHatResell() {
     const provider = new ethers.providers.JsonRpcProvider(ropsten)
     const key = simpleCrypto.decrypt(cipherEth)
+    
     const wallet = new ethers.Wallet(key, provider);
+    
     const contract = new ethers.Contract(ropstenNFTcontract, NFT, wallet);
+
     const itemArray = [];
-    contract.totalSupply().then(result => {
+    const owner2 = await contract._tokenIds().then(result => {console.log("tokenids  " + result)})
+    contract._tokenIds().then(async result => {
       for (let i = 0; i < result; i++) {
         var token = i + 1         
-        var owner = contract.ownerOf(token)
-        var getOwner = Promise.resolve(owner)
-        getOwner.then(address => {
-        if (address == ropstenNFTcontract) {
-        const rawUri = contract.tokenURI(token)
-        const Uri = Promise.resolve(rawUri)
-        const getUri = Uri.then(value => {
-          let cleanUri = 'https://ipfs.io/ipfs/' + value
-          console.log(cleanUri)
-          let metadata = axios.get(cleanUri).catch(function (error) {
-            console.log(error.toJSON());
-          });
-          return metadata;
-        })
-        getUri.then(value => {
-          let rawImg = value.data.image
-          var name = value.data.name
-          var desc = value.data.description
-          let image = 'https://ipfs.io/ipfs/' + rawImg
-          const rawitemsForSale = contract.itemsForSale(token)
-          const itemsForSale = Promise.resolve(rawitemsForSale)
-          let price;
-          itemsForSale.then(value => {
-            console.log("aquiii" + value)
-          })
-          Promise.resolve(price).then(_hex => {
-          var salePrice = Number(_hex);
-          var txPrice = salePrice.toString()
-          Promise.resolve(owner).then(value => {
-            let ownerW = value;
-            let outPrice = ethers.utils.formatUnits(salePrice.toString(), 'ether')
-            let meta = {
-              name: name,
-              img: image,
-              cost: txPrice,
-              val: outPrice,
-              tokenId: token,
-              wallet: ownerW,
-              desc
+        var owner = await contract.ownerOf(token)
+        if (owner == ropstenNFTcontract) {
+                let test = await contract.Items(token)
+                const rawUri = await contract.tokenURI(token)
+                let metadata = await axios.get(rawUri)
+                let rawImg = metadata.data.image
+                var name = metadata.data.name
+                var desc = metadata.data.description
+                let image = rawImg
+                let itemRaw = await contract.Items(token)
+                let priceFinal = (Number(itemRaw[4]) / 10 ** 18).toString()
+                console.log(priceFinal)
+                let seller = itemRaw[5].toString()
+
+                let meta = {
+                      name: name,
+                      img: image,
+                      price: priceFinal,
+                      tokenId: token,
+                      wallet: ropstenNFTcontract,
+                      seller, 
+                      desc
+                    }
+                    console.log(meta)
+                    itemArray.push(meta)
             }
-            console.log(meta)
-            itemArray.push(meta)
-          })
-        })
-      })
-    }})
     }})
     await new Promise(r => setTimeout(r, 3000));
-    hhResellNfts(itemArray)
+    ropstenNFTcontractsell(itemArray)
   }
 
   const responsive = {

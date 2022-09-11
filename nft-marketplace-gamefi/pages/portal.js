@@ -39,8 +39,8 @@ export default function Sell() {
       const wallet = new ethers.Wallet(key, provider);
       const contract = new ethers.Contract(ropstenNFTcontract, NFT, wallet);
       const itemArray = [];
-      const owner2 = await contract._tokenIds().then(result => {console.log(console.log("AQUIIIIII  " + result))})
-      contract._tokenIds().then(result => {
+      const owner2 = await contract._tokenIds()
+      await contract._tokenIds().then(result => {
         console.log("OIII" + result)
         for (let i = 0; i < result; i++) {
           var token = i + 1                    
