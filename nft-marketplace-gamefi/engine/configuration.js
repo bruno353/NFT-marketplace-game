@@ -1,4 +1,3 @@
-
 /*
 Update values accordingly
 xxnft is the NFT SmartContract Address
@@ -35,7 +34,7 @@ Global Parameters
 
 //your parameters (Bruno)
 export var ropstenNFTcontract = "0x5eea9b4e421d27407093DC8c5d2EFa9417dac784";
-var ropstenrpc = "https://eth-rinkeby.alchemyapi.io/v2/m8umOEv-BgiuBfFQJARY_V4gW3HORT1G";
+var ropstenrpc = "";
 
 
 export var mainnet = hhrpc
