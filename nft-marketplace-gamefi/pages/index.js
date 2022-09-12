@@ -135,10 +135,11 @@ export default function Home() {
                   const connection = await web3Modal.connect()
                   const provider = new ethers.providers.Web3Provider(connection)
                   const signer = provider.getSigner()
+                  console.log("Funcionando " + signer)
                   const contract = new ethers.Contract(ropstenNFTcontract, NFT, signer)
-                  const transaction = await contract.buyNft(nft.tokenId, { value: nft.cost })
-                  await transaction.wait()
-                  router.push('/portal')
+                  const transaction = await contract.buyItem(nft.tokenId, { value: ethers.utils.parseEther(nft.price) })
+                  //await transaction.wait()
+                  //router.push('/portal')
                 }
                 return (
                   <Grid xs={3}>

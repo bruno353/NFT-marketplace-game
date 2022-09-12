@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
   return(
     <div>
 <div style={{background:'black'}} >
-            <Container lg css={{marginTop:'$5'}}>
+            <Container lg css={{marginTop:'$2', marginBottom:'$5'}}>
             <Row justify="center">
             <Col css={{ marginTop: '$8' }}>
               <img style={{width:'220px'}} src="n2DMarket.png" />
@@ -82,6 +82,21 @@ function MyApp({ Component, pageProps }) {
                     fontSize: '20px'
                   }}>
                     My NFT Portal
+                  </a>
+                </Link>
+              </Button>
+            </Col>
+            <Col css={{ marginTop: '$8' }} >
+            <Button size="sm"
+            style={{background:'#00000070', boxShadow:'0px 0px 4px #ffffff'}}>
+                <Link href="/mint">
+                  <a style={{
+                    fontFamily: 'SF Pro Display',
+                    fontWeight: '500',
+                    color: 'white',
+                    fontSize: '20px'
+                  }}>
+                    Mint
                   </a>
                 </Link>
               </Button>
