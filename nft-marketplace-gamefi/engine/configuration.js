@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
 Update values accordingly
 xxnft is the NFT SmartContract Address
@@ -40,6 +40,3 @@ var ropstenrpc = "https://eth-rinkeby.alchemyapi.io/v2/m8umOEv-BgiuBfFQJARY_V4gW
 
 export var mainnet = hhrpc
 export var ropsten = ropstenrpc
-=======
-//put your values
->>>>>>> a884556b66753a7a602fe795e8dfb8cf8eceef93

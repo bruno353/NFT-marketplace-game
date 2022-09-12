@@ -27,7 +27,7 @@ export default function Home() {
     confetti();
   };
   const router = useRouter()
-  console.log("tokensids:")
+
   async function loadHardHatResell() {
     const provider = new ethers.providers.JsonRpcProvider(ropsten)
     const key = simpleCrypto.decrypt(cipherEth)
@@ -68,7 +68,8 @@ export default function Home() {
                     itemArray.push(meta)
             }
     }})
-    await new Promise(r => setTimeout(r, 3000));
+    await new Promise(r => setTimeout(r, 9000));
+    console.log("itens: " + itemArray)
     ropstenNFTcontractsell(itemArray)
   }
 
@@ -95,7 +96,7 @@ export default function Home() {
       <div>
         <Container xl style={{ backgroundImage: 'linear-gradient(to top, #020202, #050505, #080808, #0b0b0b, #0e0e0e, #16141a, #1e1724, #291a2d, #451a3a, #64133c, #820334, #9b0022)' }}>
           <Container xs css={{marginBottom:'$3'}}>
-          <Text css={{ marginLeft: '$40', justifyContent:'' }} h2>Top Collections</Text>
+          <Text css={{ marginLeft: '$40', justifyContent:'' }} h2>Trix Battle Tactics</Text>
           <Carousel swipeable={false}
             draggable={false}
             showDots={true}
@@ -159,7 +160,7 @@ export default function Home() {
                       <Card.Footer css={{ justifyItems: "flex-start" }}>
                     <Row key={id}wrap="wrap" justify="space-between" align="center">
                       <Text wrap="wrap">{nft.desc}</Text>
-                      <Text  style={{ fontSize: '30px' }}>{nft.val} <img src='n2dr-logo.png' style={{ width: '60px', height: '25px', marginTop: '4px' }} /></Text>
+                      <Text  style={{ fontSize: '30px' }}>{nft.price} MATIC </Text>
                       <Button color="gradient" style={{ fontSize: '20px' }} onPress={() => handleConfetti(buylistNft(nft))}>Buy</Button>
                     </Row>
                   </Card.Footer>
