@@ -49,7 +49,7 @@ export default function Sell() {
             });
           
           const rawUri = contract.tokenURI(token).catch(function (error) {
-              console.log("tokens filtered");
+              console.log("tokens filtered?");
             });
           const Uri = Promise.resolve(rawUri)
           const getUri = Uri.then(value => {
