@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Spacer, Button, Col, Row, Container, Dropdown, Text } from '@nextui-org/react';
 import react from "react";
 import Footer from './footer';
-
+const privateKey = "web3providerPolygon"
 const theme = createTheme({
   type: "dark",
   theme: {
