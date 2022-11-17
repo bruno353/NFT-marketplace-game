@@ -67,7 +67,7 @@ export default function createMarket() {
               <Container css={{ marginBottom: '$2' }}>
                 <Input
                   css={{ marginTop: '$2' }}
-                  placeholder="Set your price in N2DR"
+                  placeholder="Set your price in Coins"
                   onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
                 />
                 <Button size="sm" style={{ fontSize: '20px' }}  css={{ marginTop: '$2', marginBottom: '$5', color:'$gradient' }}>
